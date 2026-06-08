@@ -1,0 +1,251 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{booktabs}
+\usepackage[expansion=false]{microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{3em}
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}
+
+\title{\bf Primes of the Form $n^2+1$ on the $6N$ Skeleton:\\
+the Wing Decomposition and the Character Spectrum\\
+of the Landau--Shanks Constant%
+\thanks{Code and measured data: \url{https://github.com/Ruqing1963/6N-n2plus1}}}
+\author{Ruqing Chen\\
+\small GUT Geoservice Inc., Montreal, Quebec, Canada\\
+\small \texttt{ruqing@hotmail.com}}
+\date{June 8, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Every constellation this series has measured so far---twin pairs, Goldbach sums, arithmetic
+progressions---is a \emph{linear} translate of the prime set. We turn to the first nonlinear
+sequence: primes of the form $n^2+1$, the subject of Landau's fourth problem. Using a square-root
+sieve on $n$ (marking $n\equiv\pm r\pmod q$ where $r^2\equiv-1$), we enumerate all $n\le3\times10^{7}$
+with $n^2+1$ prime---$1{,}275{,}229$ of them, with $n^2+1$ as large as $9\times10^{14}$---and read
+the result through the $6N$ lattice. Three findings. (i) A \emph{wing decomposition}: $n$ must be even
+($n$ odd annihilates $n^2+1$ into the even residue class), and among even $n$, $6\mid n$ sends $n^2+1$
+to the right break-zone $6N{+}1$ while $n\equiv2,4\pmod6$ sends it to the left zone $6N{-}1$. We measure
+the split as $\mathrm{right}:\mathrm{left}=0.50015$, exactly the $1{:}2$ of pure counting: there is
+\emph{no} arithmetic bias between the wings beyond the residue census. (ii) A \emph{character
+spectrum}: the local factor $g(q)=\bigl(1-\omega(q)/q\bigr)/(1-1/q)$ splits the odd primes by the
+quadratic character of $-1$. Primes $q\equiv3\pmod4$ \emph{never} divide $n^2+1$ and enhance it by
+$q/(q-1)>1$; primes $q\equiv1\pmod4$ divide it on two residues and suppress it by $(q-2)/(q-1)<1$. (iii)
+The product of these factors is the Landau--Shanks constant $C=\prod_p g(p)=1.37281$, and it controls
+the count: the measured $Q(N)/\!\int_2^N\!dt/\log(t^2{+}1)$ equals $1.37253$, matching $C$ to
+$0.02\%$, with the empirical constant converging onto $C$ as $N$ grows. We verify the nonlinear
+local--global (Bateman--Horn) heuristic to better than a part in $10^{3}$ at $n^2+1\sim10^{15}$. We make
+no claim about the infinitude of such primes: Landau's problem is the backdrop, not a target. As
+throughout, this is a measurement, not a theorem.
+\end{abstract}
+
+\section{Introduction}
+Whether there are infinitely many primes of the form $n^2+1$ is the fourth of the problems Landau
+called hopeless in 1912; it remains open. The conjectural \emph{count} is not open in the heuristic
+sense: Hardy and Littlewood's Conjecture~E \cite{HL}, in the precise form of Bateman and Horn
+\cite{BH}, predicts
+\[
+Q(N):=\#\{\,n\le N : n^2+1\ \text{prime}\,\}\ \sim\ C\int_2^N\frac{dt}{\log(t^2+1)},
+\qquad C=\prod_p\frac{1-\omega(p)/p}{1-1/p},
+\]
+where $\omega(p)$ counts solutions of $n^2+1\equiv0\pmod p$, and $C=1.37281\ldots$ is the
+constant Shanks computed \cite{Shanks}. The leading behaviour is forced by the local densities; the
+constant is the delicate part, and it has been checked numerically before.
+
+What this series has \emph{not} done is look at a nonlinear prime sequence at all. Twin centres
+(Parts~I, XXIII), Goldbach sums, and the arithmetic progressions of Part~XXX \cite{PXXX} are all
+\emph{linear}: a fixed shift, a sum, a constant step. Their singular series are products over the
+residues a \emph{translate} occupies. The map $n\mapsto n^2+1$ is the first quadratic deformation, and
+on the $6N$ lattice it does something the linear constellations never do: it folds the integer line
+onto the break-zones through a quadratic character. This paper measures that folding.
+
+The result has three layers. A geometric \emph{selection-and-wing} structure fixed by $n\bmod6$; a
+\emph{character spectrum} of per-prime factors split by $\left(\frac{-1}{q}\right)$; and the
+\emph{Landau--Shanks constant} as their product, verified to control the count to $0.02\%$ at
+$X=n^2+1\sim10^{15}$. We do not touch the infinitude question.
+
+\section{Setup: the quadratic sequence and its local solutions}
+A prime $q$ divides $n^2+1$ exactly when $n^2\equiv-1\pmod q$, so the local solution count is
+\[
+\omega(q)=\#\{n\bmod q: n^2\equiv-1\}=
+\begin{cases}
+1,& q=2,\\
+2,& q\equiv1\pmod4\quad(\text{$-1$ is a quadratic residue}),\\
+0,& q\equiv3\pmod4\quad(\text{$-1$ is a non-residue}).
+\end{cases}
+\]
+This single dichotomy---whether $-1$ is a square mod $q$---governs everything below. We enumerate
+$n^2+1$ primes by a \emph{square-root sieve} on $n$ rather than on the (astronomically larger) values:
+for each $q\equiv1\pmod4$ up to $N$ we compute a root $r$ with $r^2\equiv-1\pmod q$ and strike the two
+classes $n\equiv\pm r\pmod q$; the class $q=2$ strikes odd $n$; primes $q\equiv3\pmod4$ strike nothing.
+A surviving $n\le N$ has $n^2+1$ free of every prime factor up to $N\ge\sqrt{n^2+1}$, hence prime (the
+finitely many $n\le\sqrt N$ are confirmed directly). At $N=3\times10^{7}$ this leaves
+$Q=1{,}275{,}229$ primes $n^2+1$, the largest near $9\times10^{14}$.
+
+\section{The wing decomposition}
+Two residues fix the geometry. Modulo $2$: if $n$ is odd then $n^2+1$ is even, so $n^2+1$ is
+annihilated into the composite even class (only $n=1$, giving $2$, escapes). Thus $n$ \emph{must be
+even}. Modulo $3$: since $3\equiv3\pmod4$, three never divides $n^2+1$; and $n^2+1\equiv1\pmod3$ when
+$3\mid n$, else $\equiv2$. Combining, for even $n$,
+\[
+n^2+1\equiv
+\begin{cases}
+1\pmod6,& 6\mid n\quad(\text{right break-zone }6N{+}1),\\
+5\pmod6,& n\equiv2,4\pmod6\quad(\text{left break-zone }6N{-}1).
+\end{cases}
+\]
+The three even classes $n\equiv0,2,4\pmod6$ each carry one third of the even integers, so pure counting
+predicts $\mathrm{right}:\mathrm{left}=1:2$. The measurement (Fig.~\ref{fig:fig1}A) gives $425{,}159$
+right against $850{,}070$ left, a ratio $0.50015$; the three even classes individually hold
+$425{,}159$, $425{,}348$, $424{,}722$, equal to within $0.07\%$.
+
+\begin{proposition}
+The wings carry no arithmetic bias beyond the residue census.
+\end{proposition}
+\noindent The reason is clean: the primality of $n^2+1$ at primes $p\ge5$ depends on $n\bmod p$, which
+equidistributes across the classes $n\bmod6$ (as $\gcd(6,p)=1$), while $p=2$ and $p=3$ act identically
+on all even $n$. So the only source of imbalance is how many even $n$ fall in each class---and that is
+exactly $1{:}2$. Put dynamically: the right wing rides a single residue channel ($6\mid n$) and the
+left wing two ($n\equiv2,4$), but the $n^2+1$-prime density \emph{per channel} is identical on the two
+break-zones. The $1{:}2$ is a channel census, not a preference---the quadratic deformation induces no
+density imbalance between the wings, in contrast to the Chebyshev bias that tilts ordinary primes
+between residue classes.
+
+\section{The character spectrum}
+The local factor of the singular series, $g(q)=\bigl(1-\omega(q)/q\bigr)/(1-1/q)$, splits the odd
+primes into two branches by the value of $\left(\frac{-1}{q}\right)$ (Fig.~\ref{fig:fig1}B):
+\[
+g(q)=
+\begin{cases}
+\dfrac{q}{q-1}>1,& q\equiv3\pmod4\ \ (\text{$q$ never divides $n^2+1$: an \emph{enhancement}}),\\[8pt]
+\dfrac{q-2}{q-1}<1,& q\equiv1\pmod4\ \ (\text{$q$ divides on two residues: a \emph{suppression}}),
+\end{cases}
+\qquad g(2)=1.
+\]
+The picture is the reverse of the twin/AP constellations, where every prime suppresses. Here half the
+primes---those for which $-1$ is a non-residue---are \emph{forbidden} from dividing $n^2+1$, so the
+sequence is locally \emph{richer} than a random integer at those primes, and the two effects compete.
+Table~\ref{tab:gq} lists the smallest factors; the measured per-prime divisibility matches
+$\omega(q)$ exactly (the factors are deterministic residue counts).
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{rccc}
+\toprule
+$q$ & $q\bmod4$ & $\omega(q)$ & $g(q)$\\
+\midrule
+3  & 3 & 0 & $3/2=1.5000$ (enhance)\\
+5  & 1 & 2 & $3/4=0.7500$ (suppress)\\
+7  & 3 & 0 & $7/6=1.1667$ (enhance)\\
+11 & 3 & 0 & $11/10=1.1000$ (enhance)\\
+13 & 1 & 2 & $11/12=0.9167$ (suppress)\\
+17 & 1 & 2 & $15/16=0.9375$ (suppress)\\
+\bottomrule
+\end{tabular}
+\caption{The first local factors. Primes $q\equiv3\pmod4$ enhance ($g>1$), $q\equiv1\pmod4$ suppress
+($g<1$); $\omega(q)$ is verified exactly by direct residue count.}
+\label{tab:gq}
+\end{table}
+
+\section{The Landau--Shanks constant and the Bateman--Horn check}
+The product of the two branches,
+\[
+C=\prod_{q\equiv1(4)}\frac{q-2}{q-1}\ \prod_{q\equiv3(4)}\frac{q}{q-1},
+\]
+converges (conditionally, with the character oscillation governed by $L(1,\chi_4)$) to the
+Landau--Shanks constant $C=1.37281$. Our partial product to $q\le3\times10^{7}$ gives $1.37280$
+(Fig.~\ref{fig:fig2}B). The approach is not monotone but \emph{beats}: each prime enters with
+$\chi_4(q)=\pm1$, contributing a factor above ($q\equiv3$) or below ($q\equiv1$) unity, so the partial
+products swing up and down, the amplitude of the beat shrinking as the alternating tail converges---the
+spectral signature, in the partial-product domain, of the two-branch character structure of \S4.
+
+The decisive test is whether this product of local data actually predicts the global count---the
+nonlinear analogue of the Hardy--Littlewood verifications of the earlier parts. It does. The measured
+\[
+\frac{Q(N)}{\int_2^N dt/\log(t^2+1)}=1.37253\qquad(N=3\times10^{7}),
+\]
+matches $C=1.37281$ to $0.02\%$ (ratio $0.99980$), and the empirical constant climbs onto $C$ as $N$
+grows (Table~\ref{tab:bh}, Fig.~\ref{fig:fig2}A): $1.253$ at $N=10^{3}$, $1.382$ at $10^{5}$, settling
+to $1.3725$ at $3\times10^{7}$. The Bateman--Horn heuristic, here applied to a degree-two sequence
+whose values reach $10^{15}$, holds to better than a part in $10^{3}$.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{rrrc}
+\toprule
+$N$ & $Q(N)$ & $\int_2^N dt/\log(t^2{+}1)$ & $Q(N)/\!\int$\\
+\midrule
+$10^{3}$ & 111      & 88.6     & 1.2531\\
+$10^{4}$ & 840      & 622.8    & 1.3487\\
+$10^{5}$ & 6{,}655    & 4{,}814.7  & 1.3822\\
+$10^{6}$ & 54{,}109   & 39{,}313.5 & 1.3764\\
+$10^{7}$ & 456{,}361  & 332{,}459.0& 1.3727\\
+$3\times10^{7}$ & 1{,}275{,}229 & 929{,}106.3 & 1.3725\\
+\bottomrule
+\end{tabular}
+\caption{Bateman--Horn density verification. The empirical constant $Q(N)/\!\int dt/\log(t^2{+}1)$
+converges to the Landau--Shanks $C=1.37281$.}
+\label{tab:bh}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{p31_fig1.pdf}
+\caption{(A) Wing decomposition: counts of $n^2+1$ primes by $n\bmod6$. Odd $n$ are annihilated; the
+three even classes are equal, so $6\mid n$ (right, $6N{+}1$) versus $n\equiv2,4$ (left, $6N{-}1$)
+splits $1{:}2$. (B) The character spectrum $g(q)$: primes $q\equiv3\pmod4$ (red) enhance, $q\equiv1$
+(blue) suppress, by the quadratic character of $-1$.}
+\label{fig:fig1}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{p31_fig2.pdf}
+\caption{(A) The empirical constant $Q(N)/\!\int_2^N dt/\log(t^2{+}1)$ converging to the Landau--Shanks
+$C=1.37281$ (dashed). (B) The character product $\prod_{p\le x}g(p)$ converging to the same $C$; the
+measured value $1.3725$ (dotted) sits on it.}
+\label{fig:fig2}
+\end{figure}
+
+\FloatBarrier
+\section{Scope and honest ledger}
+The experiment carries the programme into its first nonlinear sequence and finds clean structure at
+each level. The \emph{selection-and-wing} geometry---$n$ even, then $6\mid n$ right versus
+$n\equiv2,4$ left---is fixed by $n\bmod6$ and measured at the unbiased ratio $1{:}2$, with no Chebyshev-
+type lean. The \emph{character spectrum} sorts the primes by $\left(\frac{-1}{q}\right)$ into an
+enhancing branch ($q\equiv3$) and a suppressing branch ($q\equiv1$), the first time in this series a
+constellation has primes that help rather than hinder. Their product is the Landau--Shanks constant,
+which we confirm controls the count to $0.02\%$ at values near $10^{15}$, a clean verification of the
+Bateman--Horn heuristic for a degree-two sequence.
+
+We are explicit about the boundary. None of this is new as theory: $\omega(q)$, the constant $C$, and
+the asymptotic were known to Hardy--Littlewood, Bateman--Horn and Shanks, and the constant has been
+computed before. What this paper adds is the $6N$ wing decomposition, the character-spectrum reading
+of the local factors, and a high-precision verification at $n^2+1\sim10^{15}$ via the square-root
+sieve. We make no statement whatsoever about Landau's problem---the infinitude of primes $n^2+1$---which
+no finite computation can reach; the count we measure would look the same whether the true answer is
+finite or infinite. Everything here equals the discrete sieve count, takes the Hardy--Littlewood
+heuristic as input, and makes no claim about the infinitude of any sequence.
+
+\paragraph{Data and code availability.} The square-root sieve to $N=3\times10^{7}$, the wing census,
+the per-prime character factors, the Bateman--Horn cumulative table and running product, and the
+figure scripts are openly available at \url{https://github.com/Ruqing1963/6N-n2plus1}.
+
+\begin{thebibliography}{9}
+\bibitem{HL} G.~H.~Hardy, J.~E.~Littlewood, \emph{Some problems of `Partitio Numerorum'; III}, Acta Math.\ \textbf{44} (1923), 1--70.
+\bibitem{Shanks} D.~Shanks, \emph{On the conjecture of Hardy \& Littlewood concerning the number of primes of the form $n^2+a$}, Math.\ Comp.\ \textbf{14} (1960), 321--332.
+\bibitem{BH} P.~T.~Bateman, R.~A.~Horn, \emph{A heuristic asymptotic formula concerning the distribution of prime numbers}, Math.\ Comp.\ \textbf{16} (1962), 363--367.
+\bibitem{PI} R.~Chen, \emph{Conditional density on the 6N skeleton} (Part I), Zenodo, doi:10.5281/zenodo.20470367 (2026).
+\bibitem{PXXIII} R.~Chen, \emph{Phase transition kinetics and topological event horizons at extreme $\omega$} (Part XXIII), Zenodo, doi:10.5281/zenodo.20586919 (2026).
+\bibitem{PXXIX} R.~Chen, \emph{Twin counts in short intervals: singular-series rigidity and the density-gradient variance} (Part XXIX), Zenodo, doi:10.5281/zenodo.20597725 (2026).
+\bibitem{PXXX} R.~Chen, \emph{Prime arithmetic progressions as a lattice resonance} (Part XXX), Zenodo, doi:10.5281/zenodo.20598405 (2026).
+\bibitem{review} R.~Chen, \emph{Arithmetic geodynamics on the 6N skeleton: a review of Parts I--XIX}, Zenodo, doi:10.5281/zenodo.20585301 (2026).
+\end{thebibliography}
+
+\end{document}

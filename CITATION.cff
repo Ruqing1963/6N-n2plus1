@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite it as below."
+title: "6N-n2plus1: Primes of the Form n^2+1 on the 6N Skeleton (Part XXXI)"
+authors:
+  - family-names: Chen
+    given-names: Ruqing
+    affiliation: "GUT Geoservice Inc., Montreal, Quebec, Canada"
+    email: ruqing@hotmail.com
+date-released: 2026-06-08
+license: MIT
+repository-code: "https://github.com/Ruqing1963/6N-n2plus1"
+abstract: >
+  Code and measured sieve data for primes of the form n^2+1 (Landau's fourth problem) on the 6N
+  skeleton. Via a square-root sieve to n=3e7 (n^2+1 up to 9e14, 1,275,229 primes) it exhibits the
+  wing decomposition (n even; 6|n right 6N+1, n=2,4 left 6N-1; ratio 1:2, no bias), the character
+  spectrum of the local factors (q=3 mod 4 enhance, q=1 mod 4 suppress, by the quadratic character of
+  -1), and the Landau-Shanks constant C=1.37281 controlling the count to 0.02% (Bateman-Horn). No
+  claim is made about the infinitude of such primes.

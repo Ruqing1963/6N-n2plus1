@@ -1,0 +1,14 @@
+parameter,value
+Nmax,30000000
+n2plus1_max,900000000000001
+n_primes_le_Nmax,1857859
+Q_count,1275229
+right_wing_6Np1,425159
+left_wing_6Nm1,850070
+right_over_left,0.50015
+predicted_right_over_left,0.50000
+C_product_to_Nmax,1.37280
+C_known_Landau_Shanks,1.37281
+BH_integral,929106.3
+C_empirical_Q_over_int,1.37253
+BH_ratio_Q_over_Cknown_int,0.99980
